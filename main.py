@@ -1,10 +1,7 @@
 import streamlit as st
 import pandas as pd
-import folium
 from io import BytesIO
 from streamlit.components.v1 import html
-from streamlit_option_menu import option_menu
-from streamlit_navigation_bar import st_navbar
 import os
 import pages as pg
 
@@ -256,38 +253,11 @@ with col1:
     """)
 
 with col2:
-
-    # Função para exibir mapa
-    def exibir_mapa(lat, long):
-        # Criando o mapa com folium
-        mapa = folium.Map(location=[lat, long], zoom_start=15)
-
-        # Adicionando um marcador circular
-        folium.CircleMarker(
-            location=[lat, long],
-            radius=10,
-            color='blue',
-            fill=True,
-            fill_color='blue',
-            popup="Instituto Federal de São Paulo - Campus Pirituba",
-            tooltip="Instituto Federal de São Paulo - Campus Pirituba",
-        ).add_to(mapa)
-
-        # Salvando o mapa em um objeto de memória ao invés de um arquivo
-        map_data = BytesIO()
-        mapa.save(map_data, close_file=False)
-
-        # Exibindo o mapa no Streamlit diretamente a partir do objeto de memória
-        html(map_data.getvalue().decode(), height=450)
-
-    exibir_mapa(-23.487939, -46.735926)
-
-    #location_data = pd.DataFrame({
-    #'latitude': [-23.487939],
-    #'longitude': [-46.735926]
-    #})
-    # Exibir o mapa com o st.map
-    #st.map(location_data, zoom=14)
+    location_data = pd.DataFrame({
+    'latitude': [-23.487939],
+    'longitude': [-46.735926]
+    })
+    st.map(location_data, zoom=14)
 
 st.html("""
     <div style="text-align: center; padding: 20px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #FF4B6E;">
@@ -305,7 +275,7 @@ st.html("""
             </a>
             <a href="https://ptb.ifsp.edu.br/index.php/superiores/ads" target="_blank" style="text-decoration: none;">
                 <div style="width: 50px; height: 50px; background-color: #f1f1f1; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                    <img src="https://portais.ifsp.edu.br/scl/images/Logo_Campus/logo_IF.jpg" alt="YouTube" style=" height: 24px;">
+                    <img src="https://portais.ifsp.edu.br/scl/images/Logo_Campus/logo_IF.jpg" alt="IFSP" style=" height: 24px;">
                 </div>
             </a>
         </div>
